@@ -6,7 +6,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-image: url('./components/assets/background.png');  background-size: cover;
+  background-image: url("./assets/background.png");  background-size: cover;
   background-position: center;
   background-attachment: fixed;
   padding-top: 200px;
@@ -37,7 +37,7 @@ header {
 }
 
 .logoPojok img {
-  height: 40px;
+  height: 45px;
 }
 
 nav {
@@ -103,9 +103,13 @@ nav a:hover {
 .teksBawah p {
   font-family: "Playpen Sans", cursive;
   font-size: x-large;
+  margin-top: 10px;
+  margin-left: 0%;
+
 }
 
 .teksBawah .p2 p {
   font-size: medium;
   padding-top: 3px;
+  padding: 10px;
 }

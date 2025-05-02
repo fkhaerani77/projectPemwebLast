@@ -1,5 +1,11 @@
 import React from "react";
-import logoTengah from "./assets/logoTengah.png";
+import logoTengah from "../assets/logo2.png";
+import lacakIcon from "../assets/lacakPesanan.png";
+import tipsIcon from "../assets/tips.png";
+import keranjangIcon from "../assets/keranjang.png";
+import produkIcon from "../assets/produk.png";
+import berandaIcon from "../assets/beranda.png";
+import { Link } from "react-router-dom";
 
 
 function Header() {
@@ -10,19 +16,19 @@ function Header() {
       </div>
       <nav>
         <a href="#">Lacak Pesanan
-          <img src={require('./assets/lacakPesanan.png')} alt="Lacak Icon" className="nav-icon" />
+          <img src={lacakIcon} alt="Lacak Icon" className="nav-icon" />
         </a>
         <a href="#">Tips
-          <img src={require('./assets/tips.png')} alt="Lacak Icon" className="nav-icon" />
+          <img src={tipsIcon} alt="Lacak Icon" className="nav-icon" />
         </a>
         <a href="#">Keranjang
-          <img src={require('./assets/keranjang.png')} alt="Lacak Icon" className="nav-icon" />
+          <img src={keranjangIcon} alt="Lacak Icon" className="nav-icon" />
         </a>
         <a href="#">Produk
-          <img src={require('./assets/produk.png')} alt="Lacak Icon" className="nav-icon" />
+          <img src={produkIcon} alt="Lacak Icon" className="nav-icon" />
         </a>
         <a href="#">Home
-          <img src={require('./assets/beranda.png')} alt="Lacak Icon" className="nav-icon" />
+          <img src={berandaIcon} alt="Lacak Icon" className="nav-icon" />
         </a>
       </nav>
     </header>

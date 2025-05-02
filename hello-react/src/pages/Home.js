@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import "./Content.js";
-import logoTengah from "./assets/logoTengah.png"
+import { Link } from "react-router-dom";
+import "./Home.js";
+import logoTengah from "../assets/logo2.png"
 
-function Content() {
+function Home() {
   useEffect(() => {
     // Salju
     const style = document.createElement("style");
@@ -74,4 +75,4 @@ function Content() {
   );
 }
 
-export default Content;
+export default Home;
