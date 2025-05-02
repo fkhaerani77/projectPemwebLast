@@ -1,38 +1,111 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sree+Krushnadevaraya&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('./components/assets/background.png');  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding-top: 200px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.667);
+  color: white;
+  padding: 25px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.logoPojok {
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: Sedgwick Ave;
+}
+
+.logoPojok img {
+  height: 40px;
+}
+
+nav {
+  padding-right: 40px;
+}
+
+nav a {
+  color: #5C5C5C;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 20px;
+  font-family: Poppins, sans-serif;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 10px;
+}
+
+nav a:hover {
+  background-color: #176b87;
+  color: #fff;
+  border-radius: 8px;
+  padding: 5px 10px;
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 8px; /* jarak antara teks dan ikon */
+}
+
+/* Tambahkan semua style dari file kamu sebelumnya */
+.content {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.content h1 {
+  color: #fff;
+  font-family: "Sedgwick Ave", cursive;
+  font-size: 128px;
+  text-shadow: 2px 2px 10px rgba(0, 119, 255, 0.7);
+  margin-bottom: 0%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.content p {
+  color: #fff;
+  font-family: "Sree Krushnadevaraya", serif;
+  font-size: 64px;
+  margin-top: 0%;
+  margin-left: 280px;
+  margin-bottom: 0px; /* tambahkan ini agar tetap konsisten */
+  line-height: 0;
+  transition: text-shadow 0.3s ease;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.content h1:hover {
+  text-shadow: 0 0 10px #fff, 0 0 30px #0ff;
 }
 
-.App-link {
-  color: #61dafb;
+.content p:hover {
+  text-shadow: 0 0 10px #2b00ff, 0 0 20px #0ff;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.teksBawah p {
+  font-family: "Playpen Sans", cursive;
+  font-size: x-large;
+}
+
+.teksBawah .p2 p {
+  font-size: medium;
+  padding-top: 3px;
 }
