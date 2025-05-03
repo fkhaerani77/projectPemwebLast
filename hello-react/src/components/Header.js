@@ -18,18 +18,21 @@ function Header() {
         <a href="#">Lacak Pesanan
           <img src={lacakIcon} alt="Lacak Icon" className="nav-icon" />
         </a>
-        <a href="#">Tips
-          <img src={tipsIcon} alt="Lacak Icon" className="nav-icon" />
-        </a>
+        <Link to="/Tips">
+          Tips
+          <img src={tipsIcon} alt="Tips Icon" className="nav-icon" />
+        </Link>
         <a href="#">Keranjang
           <img src={keranjangIcon} alt="Lacak Icon" className="nav-icon" />
         </a>
-        <a href="#">Produk
-          <img src={produkIcon} alt="Lacak Icon" className="nav-icon" />
-        </a>
-        <a href="#">Home
-          <img src={berandaIcon} alt="Lacak Icon" className="nav-icon" />
-        </a>
+        <Link to="/Product">
+          Product
+          <img src={produkIcon} alt="Tips Icon" className="nav-icon" />
+        </Link>
+        <Link to="/Home">
+          Home
+          <img src={berandaIcon} alt="Tips Icon" className="nav-icon" />
+        </Link>
       </nav>
     </header>
   );

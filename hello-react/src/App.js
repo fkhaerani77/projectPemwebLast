@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import "./App.css";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
+import Tips from "./pages/Tips";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -11,8 +12,9 @@ function App() {
     <BrowserRouter> 
     <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Product" element={<Product />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/tips" element={<Tips />} />
       </Routes>
       <Footer />
     </BrowserRouter>
