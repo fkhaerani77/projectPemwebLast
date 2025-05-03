@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Home.js";
 import logoTengah from "../assets/logo2.png"
+import Product from "./Product.js";
 
 function Home() {
   useEffect(() => {
@@ -60,6 +61,11 @@ function Home() {
       <p>Nusantara</p>
       <div className="logoTengah">
         <img src={logoTengah} alt="Logo Aqua Flora" height="358" />
+      </div>
+      <div>
+        <Link to="/Product">
+          <button className="btn-product">Mulai Menjelajah</button>
+        </Link>
       </div>
       <div className="teksBawah">
         <p>~Ikan menari tanaman berseri~</p>

@@ -100,16 +100,67 @@ nav a:hover {
   text-shadow: 0 0 10px #2b00ff, 0 0 20px #0ff;
 }
 
+.btn-product {
+  padding: 10px 20px;            
+  font-size: 16px;   
+  font-family: "Poppins", sans-serif;  
+  font-weight: 600;          
+  background-color: #176b87;     
+  color: white;                  
+  border: none;                  
+  border-radius: 8px;            
+  cursor: pointer;               
+  transition: background-color 0.3s ease; 
+}
+
+.btn-product:hover {
+  background-color: #fff;  
+  color: #176b87;   
+}
+
 .teksBawah p {
   font-family: "Playpen Sans", cursive;
   font-size: x-large;
   margin-top: 10px;
   margin-left: 0%;
-
+  padding-top: 20px;
+  padding-bottom: 20px;
 }  
 
 .teksBawah .p2 p {
   font-size: medium;
-  padding-top: 3px;
-  padding: 10px;
+  padding: 5px;
 }
+
+.footer {
+  background-color: white;
+  padding: 25px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-family: Arial, sans-serif;
+  border-top: 1px solid #ddd;
+  color: #333;
+}
+
+.footer .footer-sosmed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.footer .footer-left {
+  font-family: "Sedgwick Ave";
+  font-size: 48px;
+  color: #176B87;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.footer-left .p {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+ 
+}
+
