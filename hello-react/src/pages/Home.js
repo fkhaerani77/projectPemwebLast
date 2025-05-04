@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Home.js";
 import logoTengah from "../assets/logo2.png"
-import Product from "./Product.js";
+import FishProduct from "./FishProduct.js";
 
 function Home() {
   useEffect(() => {
@@ -46,15 +46,6 @@ function Home() {
   return (
     <div className="content">
       
-      <iframe 
-        width="0" 
-        height="0" 
-        src="https://www.youtube.com/embed/FbScaiYQPtQ?autoplay=1&loop=1&playlist=FbScaiYQPtQ" 
-        title="YouTube audio player" 
-        frameborder="0" 
-        allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-        referrerpolicy="strict-origin-when-cross-origin">
-      </iframe>
 
       <p>Welcome to</p>
       <h1>Aqua Flora</h1>

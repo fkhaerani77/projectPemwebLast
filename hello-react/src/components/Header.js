@@ -5,6 +5,8 @@ import tipsIcon from "../assets/tips.png";
 import keranjangIcon from "../assets/keranjang.png";
 import produkIcon from "../assets/produk.png";
 import berandaIcon from "../assets/beranda.png";
+import ikanIcon from "../assets/fish.png"
+import tanamanIcon from "../assets/plant.png"
 import { Link } from "react-router-dom";
 
 
@@ -22,13 +24,26 @@ function Header() {
           Tips
           <img src={tipsIcon} alt="Tips Icon" className="nav-icon" />
         </Link>
-        <a href="#">Keranjang
-          <img src={keranjangIcon} alt="Lacak Icon" className="nav-icon" />
-        </a>
-        <Link to="/Product">
-          Product
-          <img src={produkIcon} alt="Tips Icon" className="nav-icon" />
+        <Link to="/Cart">
+          Keranjang
+          <img src={keranjangIcon} alt="Tips Icon" className="nav-icon" />
         </Link>
+        <div className="dropdown">
+          <span className="dropbtn">
+            Produk
+            <img src={produkIcon} alt="Produk Icon" className="nav-icon" />
+          </span>
+          <div className="dropdown-content">
+              <Link to="/product/ikan" className="submenu-item">
+                <img src={ikanIcon} alt="Ikan" className="submenu-icon" />
+                Ikan
+              </Link>
+              <Link to="/product/tanaman" className="submenu-item">
+                <img src={tanamanIcon} alt="Tanaman" className="submenu-icon" />
+                Tanaman
+              </Link>
+          </div>
+        </div>
         <Link to="/Home">
           Home
           <img src={berandaIcon} alt="Tips Icon" className="nav-icon" />
