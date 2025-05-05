@@ -12,6 +12,16 @@ body {
   padding-top: 180px;
 }
 
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}
+
 /*CSS bagian Header*/
 header {
   position: fixed;
@@ -605,6 +615,224 @@ nav a:hover {
   width: 30px;
   height: 30px;
 }
+
+/*CSS untuk Keranjang*/
+
+.cart-page-horizontal {
+  width: 100%;
+  max-width: 1200px; /* Membuat tampilan responsif pada ukuran layar besar */
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff; /* Latar belakang putih */
+  border-radius: 12px; /* Memberikan sudut yang lebih halus */
+}
+
+.cart-items {
+  width: 65%;
+  background-color: #fff; /* Memastikan bagian kiri tetap ada latar belakang putih */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cart-summary {
+  width: 30%;
+  background-color: #B4D4FF; /* Memastikan bagian kanan juga ada latar belakang putih */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item {
+  display: flex;
+  flex-direction: row; /* Baris horizontal */
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease;
+}
+
+.cart-item:hover {
+  background-color: #B4D4FF;
+}
+
+.cart-item img {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+}
+
+.item-info {
+  flex: 1;
+  margin-left: 1rem;
+}
+
+.item-info h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 4px;
+  font-family: Poppins, sans-serif;
+}
+
+.item-info .price {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 8px;
+}
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.qty-control button {
+  padding: 4px 12px;
+  background-color: #176b87;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.qty-control span {
+  font-weight: bold;
+}
+
+button.hapus {
+  background-color: #bd0000;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.summary-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.summary-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.total {
+  text-align: right;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-right: 0; /* Pastikan tidak ada padding kanan berlebih */
+}
+
+
+.checkout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: #ffffff;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.checkout-btn:hover {
+  transform: scale(1.05);
+}
+
+.checkout-btn img {
+  width: 100px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.checkout-btn {
+  display: flex;
+  align-items: center; /* Menyelaraskan gambar dan teks secara vertikal */
+  justify-content: center;
+  text-align: center;
+  padding: 12px 40px;
+  background-color: #108DE9; /* Mengubah tombol checkout menjadi hijau */
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  gap: 10px; /* Memberikan jarak antara gambar dan teks */
+  border-radius: 30px;
+  min-width: 350px;
+  transition: all 0.3s ease; /* Animasi halus */
+  box-shadow: 0 4px 8px rgba(106, 106, 106, 0.5); /* Bayangan awal */
+}
+
+.checkout-btn:hover {
+  transform: scale(1.05); /* Membesar sedikit saat hover */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Bayangan lebih tegas */
+  background-color: #004b80; /* Latar belakang sedikit biru muda */
+}
+
+.checkout-btn img {
+  width: 100px; /* Ukuran logo aplikasi pembayaran */
+  height: 30px;
+  object-fit: contain; /* Memastikan gambar tidak terdistorsi */
+  filter: brightness(0) invert(1);
+}
+
+.empty-cart,
+.empty-summary {
+  text-align: center;
+  color: #6b7280;
+}
+
+.empty-cart p,
+.empty-summary p {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .cart-page-horizontal {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .cart-items,
+  .cart-summary {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .cart-summary {
+    box-shadow: none;
+  }
+}
+
+
 
 
 
