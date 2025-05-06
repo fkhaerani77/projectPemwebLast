@@ -8,6 +8,7 @@ import berandaIcon from "../assets/beranda.png";
 import ikanIcon from "../assets/fish.png"
 import tanamanIcon from "../assets/plant.png"
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 
 function Header() {

@@ -748,28 +748,73 @@ button.hapus {
   padding-right: 0; /* Pastikan tidak ada padding kanan berlebih */
 }
 
-
-.checkout-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  background-color: #ffffff;
-  border: none;
-  padding: 14px 28px;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+.user-data-form {
+  margin-top: 1rem;
 }
 
-.checkout-btn:hover {
-  transform: scale(1.05);
+/* Input fields */
+.input-field {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
 }
 
-.checkout-btn img {
-  width: 100px;
-  height: 30px;
-  object-fit: contain;
+.input-field:focus {
+  border-color: #4f9fef;
+  box-shadow: 0 0 5px rgba(79, 159, 239, 0.3);
+}
+
+.input-field::placeholder {
+  color: #aaa;
+}
+
+/* Label untuk input */
+.input-label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.empty-cart,
+.empty-summary {
+  text-align: center;
+  color: #6b7280;
+}
+
+.empty-cart p,
+.empty-summary p {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .cart-page-horizontal {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .cart-items,
+  .cart-summary {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .cart-summary {
+    box-shadow: none;
+  }
+}
+
+.pay-label {
+  font-family: Poppins, sans-serif;
+  font-weight: 600;
+  text-align: center;
+  font-size: 14px;
 }
 
 .checkout-btn {
@@ -803,34 +848,7 @@ button.hapus {
   filter: brightness(0) invert(1);
 }
 
-.empty-cart,
-.empty-summary {
-  text-align: center;
-  color: #6b7280;
-}
 
-.empty-cart p,
-.empty-summary p {
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-
-@media screen and (max-width: 768px) {
-  .cart-page-horizontal {
-    flex-direction: column;
-    padding: 20px;
-  }
-
-  .cart-items,
-  .cart-summary {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  .cart-summary {
-    box-shadow: none;
-  }
-}
 
 
 
