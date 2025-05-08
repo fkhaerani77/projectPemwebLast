@@ -19,7 +19,7 @@ function Header() {
       </div>
       <nav>
       <Link to="/order-tracking">
-          Tips
+          Lacak Pesanan
           <img src={lacakIcon} alt="Tips Icon" className="nav-icon" />
         </Link>
         <Link to="/Tips">
