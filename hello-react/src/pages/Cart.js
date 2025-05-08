@@ -143,11 +143,12 @@ const Cart = () => {
                 <option value="tiki">TIKI</option>
               </select>
               <button
-                className="bg-green-500 text-white px-3 py-1 rounded"
+                className="cek-ongkir-btn"
                 onClick={getOngkir}
               >
                 Cek Ongkir
               </button>
+
             </div>
 
             {/* 🔽 TOTAL + ONGKIR */}
@@ -195,7 +196,7 @@ const Cart = () => {
               onClick={handleCheckout}
             >
               <img src={logoDana} alt="Dana Logo" />
-              {isUserDataComplete ? "Checkout dengan DANA" : " "}
+              {isUserDataComplete ? "" : " "}
             </button>
           </>
         ) : (

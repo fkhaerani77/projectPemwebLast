@@ -18,9 +18,10 @@ function Header() {
         <img src={logoTengah} alt="Logo Aqua Flora" />
       </div>
       <nav>
-        <a href="#">Lacak Pesanan
-          <img src={lacakIcon} alt="Lacak Icon" className="nav-icon" />
-        </a>
+      <Link to="/order-tracking">
+          Tips
+          <img src={lacakIcon} alt="Tips Icon" className="nav-icon" />
+        </Link>
         <Link to="/Tips">
           Tips
           <img src={tipsIcon} alt="Tips Icon" className="nav-icon" />

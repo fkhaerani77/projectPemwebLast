@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Home.js";
-import logoTengah from "../assets/logo2.png"
-import FishProduct from "./FishProduct.js";
+import logoTengah from "../assets/logo2.png";
+import ikan from "../assets/lele.jpeg";
+import tanaman from "../assets/wortel.png";
 
 function Home() {
   useEffect(() => {
@@ -43,10 +44,10 @@ function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  const [showModal, setShowModal] = React.useState(false);
+
   return (
     <div className="content">
-      
-
       <p>Welcome to</p>
       <h1>Aqua Flora</h1>
       <p>Nusantara</p>
@@ -54,20 +55,81 @@ function Home() {
         <img src={logoTengah} alt="Logo Aqua Flora" height="358" />
       </div>
       <div>
-        <Link to="/Product">
-          <button className="btn-product">Mulai Menjelajah</button>
-        </Link>
+        <button className="btn-product" onClick={() => setShowModal(true)}>
+          Mulai Menjelajah
+        </button>
       </div>
       <div className="teksBawah">
         <p>~Ikan menari tanaman berseri~</p>
         <div className="p2">
           <p>
-            Aqua Floris Nusantara menyediakan ikan hidup segar dan sehat untuk
+            Aqua Flora Nusantara menyediakan ikan hidup segar dan sehat untuk
             hobi
           </p>
           <p>dan budidaya. Siap kirim dengan aman ke seluruh Indonesia.</p>
         </div>
       </div>
+
+      <div className="summary-section">
+        {/* RINGKASAN PRODUK */}
+        <section className="product-summary">
+          <h2>Ringkasan Produk</h2>
+          <div className="product-grid">
+            <div className="product-card">
+              <img src={ikan} alt="Ikan Lele" />
+              <h3>Ikan Lele</h3>
+            </div>
+            <div className="product-card">
+              <img src={tanaman} alt="Wortel" />
+              <h3>Wortel</h3>
+            </div>
+            <div className="product-card">
+              <img src={ikan} alt="Ikan Nila" />
+              <h3>Ikan Nila</h3>
+            </div>
+            <div className="product-card">
+              <img src={tanaman} alt="Bayam" />
+              <h3>Bayam</h3>
+            </div>
+            <div className="product-card">
+              <img src={ikan} alt="Ikan Mas" />
+              <h3>Ikan Mas</h3>
+            </div>
+          </div>
+        </section>
+
+        <section className="tips-summary">
+          <p>
+            Ingin tahu lebih banyak tentang tips perawatan ikan dan tanaman?
+          </p>
+          <span>
+            <Link to="/tips">
+              <button className="btn-tips">Tips Selengkapnya</button>
+            </Link>
+          </span>
+        </section>
+
+
+      </div>
+
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Pilih Jenis Produk</h2>
+            <div className="modal-buttons">
+              <Link to="/product/ikan">
+                <button className="modal-btn">Produk Ikan</button>
+              </Link>
+              <Link to="/product/tanaman">
+                <button className="modal-btn">Produk Tanaman</button>
+              </Link>
+            </div>
+            <button className="modal-close" onClick={() => setShowModal(false)}>
+              Tutup
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
