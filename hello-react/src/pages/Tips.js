@@ -62,6 +62,34 @@ const Tips = () => {
       isArticle: true,
       url: "https://www.detik.com/bali/berita/d-6580860/13-jenis-tanaman-hidroponik-dan-cara-penanamannya-di-rumah",
     },
+    {
+      id: 9,
+      title: "5 Tips Menyiram Tanaman Yang Tepat",
+      isFeatured: true,
+      isArticle: true,
+      url: "https://www.kompas.com/homey/read/2022/02/11/203700676/5-tips-menyiram-tanaman-yang-tepat-agar-tidak-mati-dan-busuk",
+    },
+    {
+      id: 10,
+      title: "Waktu yang Pas dalam Pemberian Pakan Lele",
+      isFeatured: true,
+      isArticle: true,
+      url: "https://www.isw.co.id/post/2017/04/04/waktu-pas-pemberian-pakan-lele",
+    },
+     {
+      id: 11,
+      title: "Daftar Air Terbaik Untuk Menyiram Tanaman",
+      isFeatured: true,
+      isArticle: true,
+      url: "https://momsmoney.kontan.co.id/news/bukan-air-keran-ini-daftar-air-terbaik-untuk-menyiram-tanaman",
+    },
+    {
+      id: 12,
+      title: "4 Tips Membedakan Tanaman Hias Indoor dan Outdoor ",
+      isFeatured: true,
+      isArticle: true,
+      url: "https://www.haibunda.com/moms-life/20220131121604-76-265843/4-tips-membedakan-tanaman-hias-indoor-dan-outdoor-tekstur-daun-hingga-kebutuhan-air",
+    },
   ];
 
   const handleWatchClick = (content, isArticle = false) => {
