@@ -1,6 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { CartContext } from "../context/CartContext";
 import logoDana from '../assets/logo-dana.png';
+import { getCost } from "../api/RajaOngkir"; // atau './utils/rajaongkir' tergantung lokasi file
+import axios from 'axios';
+import CitySelector from "./CitySelector"; // Import komponen CitySelector
 
 const Cart = () => {
   const { keranjang, updateQty, removeItem } = useContext(CartContext);
@@ -11,10 +14,22 @@ const Cart = () => {
     telepon: "",
   });
 
-  // 🔽 TAMBAHKAN STATE UNTUK ONGKIR
+  useEffect(() => {
+    // Ambil data kota dari API
+    axios.get("http://localhost:5000/api/ongkir")
+      .then((response) => {
+        setKotaList(response.data); // Simpan data kota
+      })
+      .catch((error) => {
+        console.error("Gagal memuat data kota:", error);
+      });
+  }, []);
+
   const [ongkir, setOngkir] = useState(null);
-  const [kotaTujuan, setKotaTujuan] = useState("");
+  const [kotaTujuan, setKotaTujuan] = useState(""); // Diterima dari CitySelector
   const [kurir, setKurir] = useState("jne");
+
+  const [kotaList, setKotaList] = useState([]); // Daftar kota sudah diambil oleh CitySelector
 
   const isUserDataComplete = userData.nama && userData.alamat && userData.telepon;
 
@@ -30,31 +45,25 @@ const Cart = () => {
     .filter((item) => selectedItems.includes(item.id))
     .reduce((sum, item) => sum + item.price * item.qty, 0);
 
-  // 🔽 TAMBAHKAN FUNCTION getOngkir
+  // Function untuk menghitung ongkir
   const getOngkir = async () => {
-    const beratTotal = keranjang
-      .filter((item) => selectedItems.includes(item.id))
-      .reduce((sum, item) => sum + item.berat * item.qty, 0); // item harus punya berat
-
+    const selectedKeranjang = keranjang.filter((item) => selectedItems.includes(item.id));
+    const beratTotal = selectedKeranjang.reduce((sum, item) => sum + item.berat * item.qty * 1000, 0); // kg ke gram
+    
     if (!kotaTujuan || beratTotal === 0) {
       alert("Pilih kota tujuan dan barang terlebih dahulu.");
       return;
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/rajaongkir/cost", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          origin: "501",
-          destination: kotaTujuan,
-          weight: beratTotal,
-          courier: kurir
-        }),
+      const response = await axios.post('http://localhost:5000/api/ongkir', {
+        origin: '501', // ID kota asal, ganti dengan ID yang benar
+        destination: kotaTujuan, // ID kota tujuan
+        weight: beratTotal, // Berat total barang dalam gram
+        courier: kurir, // Nama kurir (misalnya "jne", "pos", "tiki")
       });
-      const data = await response.json();
-      const biaya = data.rajaongkir.results[0].costs[0].cost[0];
-      setOngkir(biaya);
+  
+      setOngkir({ value: response.data[0].cost[0].value }); // Ambil ongkir dari response
     } catch (err) {
       console.error("Gagal ambil ongkir:", err);
     }
@@ -74,6 +83,11 @@ const Cart = () => {
       ...userData,
       [name]: value,
     });
+  };
+
+  const formatRupiah = (angka) => {
+    if (!angka) return "Rp 0";
+    return "Rp " + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
 
   return (
@@ -127,16 +141,17 @@ const Cart = () => {
                 ))}
             </ul>
 
-            {/* 🔽 TAMBAHKAN FORM ONGKIR */}
+            {/* Pengiriman */}
             <div className="ongkir-form mb-4">
               <h3 className="font-semibold mb-2">Pengiriman</h3>
-              <input
-                type="text"
-                placeholder="ID Kota Tujuan (contoh: 501)"
-                value={kotaTujuan}
-                onChange={(e) => setKotaTujuan(e.target.value)}
-                className="input-field mb-2"
+
+              {/* Gunakan komponen CitySelector untuk memilih kota tujuan */}
+              <CitySelector 
+                kotaList={kotaList}
+                selectedKota={kotaTujuan}
+                onCityChange={setKotaTujuan} 
               />
+
               <select value={kurir} onChange={(e) => setKurir(e.target.value)} className="input-field mb-2">
                 <option value="jne">JNE</option>
                 <option value="pos">POS</option>
@@ -148,18 +163,18 @@ const Cart = () => {
               >
                 Cek Ongkir
               </button>
-
             </div>
 
-            {/* 🔽 TOTAL + ONGKIR */}
+            {/* Total */}
             <div className="total">
-              <p>Subtotal: Rp {total.toLocaleString()}</p>
-              <p>Ongkir: Rp {ongkir ? ongkir.value.toLocaleString() : "-"}</p>
+              <p>Subtotal: {formatRupiah(total)}</p>
+              <p>Ongkir: {formatRupiah(ongkir ? ongkir.value : 0)}</p>
               <p className="font-bold text-lg">
-                Total Bayar: Rp {(total + (ongkir?.value || 0)).toLocaleString()}
+                Total Bayar: {formatRupiah(total + (ongkir?.value || 0))}
               </p>
             </div>
 
+            {/* Informasi Pemesan */}
             <div className="user-data-form">
               <h3 className="text-lg font-semibold mb-4">Informasi Pemesan</h3>
               <input

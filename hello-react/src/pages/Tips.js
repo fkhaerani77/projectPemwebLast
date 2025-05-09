@@ -50,17 +50,17 @@ const Tips = () => {
     },
     {
       id: 7,
-      title: "Jenis-jenis Tanaman Budidaya",
+      title: "7 Tips Merawat Tanaman Hias",
       isFeatured: true,
       isArticle: true,
-      url: "https://www.gramedia.com/best-seller/jenis-jenis-tanaman-budidaya/?srsltid=AfmBOoqU-jzaUTpwp07EkFfw9xPBcFdUW5g9NSGTgipnWASj_N1X8XHv",
+      url: "https://www.detik.com/properti/tips-dan-panduan/d-7315317/7-tips-merawat-tanaman-hias-supaya-tumbuh-sehat-dan-kuat-di-rumah",
     },
     {
       id: 8,
       title: "7 Tips Merawat Tanaman Hias",
       isFeatured: true,
       isArticle: true,
-      url: "https://www.detik.com/properti/tips-dan-panduan/d-7315317/7-tips-merawat-tanaman-hias-supaya-tumbuh-sehat-dan-kuat-di-rumah",
+      url: "https://www.detik.com/bali/berita/d-6580860/13-jenis-tanaman-hidroponik-dan-cara-penanamannya-di-rumah",
     },
   ];
 
