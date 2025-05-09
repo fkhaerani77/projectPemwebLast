@@ -4,6 +4,9 @@ import "./Home.js";
 import logoTengah from "../assets/logo2.png";
 import ikan from "../assets/lele.jpeg";
 import tanaman from "../assets/wortel.png";
+import Koi from "../assets/koi.jpeg";
+import MawarMerah from "../assets/MawarMerah.jpeg";
+import mas from "../assets/mas.jpeg";
 
 function Home() {
   useEffect(() => {
@@ -84,15 +87,15 @@ function Home() {
               <h3>Wortel</h3>
             </div>
             <div className="product-card">
-              <img src={ikan} alt="Ikan Nila" />
-              <h3>Ikan Nila</h3>
+              <img src={Koi} alt="koi" />
+              <h3>Ikan Koi</h3>
             </div>
             <div className="product-card">
-              <img src={tanaman} alt="Bayam" />
-              <h3>Bayam</h3>
+              <img src={MawarMerah} alt="Mawar Merah" />
+              <h3>Mawar Merah</h3>
             </div>
             <div className="product-card">
-              <img src={ikan} alt="Ikan Mas" />
+              <img src={mas} alt="Ikan Mas" />
               <h3>Ikan Mas</h3>
             </div>
           </div>
