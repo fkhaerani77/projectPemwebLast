@@ -1,12 +1,11 @@
-import React, { useContext, useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import logoDana from '../assets/logo-dana.png';
-import { getCost } from "../api/RajaOngkir"; // atau './utils/rajaongkir' tergantung lokasi file
 import axios from 'axios';
-import CitySelector from "./CitySelector"; // Import komponen CitySelector
+// import CitySelector from "./CitySelector"; // Import komponen CitySelector
 
 const Cart = () => {
-  const { keranjang, updateQty, removeItem } = useContext(CartContext);
+  const { keranjang, setKeranjang } = useContext(CartContext);
   const [selectedItems, setSelectedItems] = useState([]);
   const [userData, setUserData] = useState({
     nama: "",
@@ -15,21 +14,20 @@ const Cart = () => {
   });
 
   useEffect(() => {
-    // Ambil data kota dari API
-    axios.get("http://localhost:5000/api/ongkir")
-      .then((response) => {
-        setKotaList(response.data); // Simpan data kota
+    axios.get("http://localhost/backend/api/cart/readCart.php")
+      .then(res => {
+        console.log("🔍 ISI KERANJANG DARI SERVER:", res.data);
+        setKeranjang(res.data.data);
       })
-      .catch((error) => {
-        console.error("Gagal memuat data kota:", error);
+      .catch(err => {
+        console.error("Gagal memuat cart:", err);
       });
-  }, []);
+  }, [setKeranjang ]);
 
   const [ongkir, setOngkir] = useState(null);
-  const [kotaTujuan, setKotaTujuan] = useState(""); // Diterima dari CitySelector
+  const [kotaTujuan] = useState("");
   const [kurir, setKurir] = useState("jne");
-
-  const [kotaList, setKotaList] = useState([]); // Daftar kota sudah diambil oleh CitySelector
+  // const [kotaList, setKotaList] = useState([]); // Daftar kota sudah diambil oleh CitySelector
 
   const isUserDataComplete = userData.nama && userData.alamat && userData.telepon;
 
@@ -43,31 +41,87 @@ const Cart = () => {
 
   const total = keranjang
     .filter((item) => selectedItems.includes(item.id))
-    .reduce((sum, item) => sum + item.price * item.qty, 0);
+    .reduce((sum, item) => sum + item.harga * item.qty, 0);
 
   // Function untuk menghitung ongkir
   const getOngkir = async () => {
-    const selectedKeranjang = keranjang.filter((item) => selectedItems.includes(item.id));
-    const beratTotal = selectedKeranjang.reduce((sum, item) => sum + item.berat * item.qty * 1000, 0); // kg ke gram
-    
-    if (!kotaTujuan || beratTotal === 0) {
-      alert("Pilih kota tujuan dan barang terlebih dahulu.");
-      return;
-    }
+    const selectedItemsList = keranjang.filter(item => selectedItems.includes(item.id));
+    const beratTotal = selectedItemsList.reduce((sum, item) => sum + item.berat * item.qty, 0);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/ongkir', {
-        origin: '501', // ID kota asal, ganti dengan ID yang benar
-        destination: kotaTujuan, // ID kota tujuan
-        weight: beratTotal, // Berat total barang dalam gram
-        courier: kurir, // Nama kurir (misalnya "jne", "pos", "tiki")
+      const res = await axios.post("http://localhost/backend/api/ongkir/getOngkirFromDB.php", {
+        origin: "Cirebon",
+        destination: kotaTujuan,
+        courier: kurir
       });
-  
-      setOngkir({ value: response.data[0].cost[0].value }); // Ambil ongkir dari response
+
+      if (res.data.success) {
+        const ongkirPerKg = res.data.ongkir_per_kg;
+        const totalOngkir = ongkirPerKg * beratTotal;
+        setOngkir({ perKg: ongkirPerKg, value: totalOngkir });
+      } else {
+        alert("Gagal hitung ongkir: " + res.data.message);
+      }
     } catch (err) {
-      console.error("Gagal ambil ongkir:", err);
+      alert("Terjadi kesalahan saat mengambil ongkir.");
+      console.error(err);
     }
   };
+
+  const updateQty = async (id, delta) => {
+    const item = keranjang.find(i => i.id === id);
+    if (!item) return;
+
+    const newQty = Math.max(1, item.qty + delta);
+
+    try {
+      await axios.put('http://localhost/backend/api/cart/updateCart.php', {
+        id: item.id,
+        qty: newQty,
+        kota_tujuan: item.kota_tujuan,
+        ekspedisi: item.ekspedisi
+      });
+
+      const res = await axios.get("http://localhost/backend/api/cart/readCart.php");
+      setKeranjang(res.data.data);
+    } catch (err) {
+      console.error("Gagal update qty:", err);
+    }
+  };
+
+  const removeItem = async (id) => {
+    try {
+      await axios.delete('http://localhost/backend/api/cart/deleteCart.php', {
+        data: { id }
+      });
+
+      const res = await axios.get("http://localhost/backend/api/cart/readCart.php");
+      setKeranjang(res.data.data);
+    } catch (err) {
+      console.error("Gagal menghapus item:", err);
+    }
+  };
+
+  // const addToCart = async (produk) => {
+  //   try {
+  //     await axios.post("http://localhost/backend/api/cart/createCart.php", {
+  //       produk_id: produk.id,
+  //       nama: produk.nama,
+  //       berat: produk.berat,
+  //       harga: produk.harga,
+  //       qty: 1,
+  //       kota_tujuan: "Jakarta",
+  //       ekspedisi: "JNE"
+  //     });
+
+  //     // ✅ Ambil ulang data cart
+  //     const res = await axios.get("http://localhost/backend/api/cart/readCart.php");
+  //     setKeranjang(res.data.data);
+
+  //   } catch (err) {
+  //     console.error("Gagal menambahkan ke cart:", err);
+  //   }
+  // };
 
   const handleCheckout = () => {
     if (!isUserDataComplete) {
@@ -108,10 +162,10 @@ const Cart = () => {
                 onChange={() => toggleSelectItem(item.id)}
                 className="checkbox mr-4"
               />
-              <img src={item.gambar} alt={item.name} className="cart-item-img w-20 h-20 object-cover mr-4" />
+              <img src={`http://localhost/backend/api/ProductFish/upload/${item.gambar}`} alt={item.nama} />
               <div className="item-info flex-grow">
                 <h3 className="text-xl">{item.nama}</h3>
-                <p className="price">Rp {item.price.toLocaleString()}</p>
+                <p className="price">Rp {(item.harga ?? 0).toLocaleString()}</p>
                 <div className="qty-control">
                   <button onClick={() => updateQty(item.id, -1)}>-</button>
                   <span>{item.qty}</span>
@@ -136,7 +190,7 @@ const Cart = () => {
                 .map((item) => (
                   <li key={item.id} className="summary-item">
                     <span>{item.nama} × {item.qty}</span>
-                    <span>Rp {(item.price * item.qty).toLocaleString()}</span>
+                    <span>Rp {(item.harga * item.qty).toLocaleString()}</span>
                   </li>
                 ))}
             </ul>
@@ -145,22 +199,24 @@ const Cart = () => {
             <div className="ongkir-form mb-4">
               <h3 className="font-semibold mb-2">Pengiriman</h3>
 
-              {/* Gunakan komponen CitySelector untuk memilih kota tujuan */}
-              <CitySelector 
+              {/* Gunakan komponen CitySelector untuk memilih kota tujuan
+              <CitySelector
                 kotaList={kotaList}
                 selectedKota={kotaTujuan}
-                onCityChange={setKotaTujuan} 
-              />
+                onCityChange={setKotaTujuan}
+              /> */}
 
-              <select value={kurir} onChange={(e) => setKurir(e.target.value)} className="input-field mb-2">
+              <select
+                value={kurir}
+                onChange={(e) => setKurir(e.target.value)}
+                className="input-field mb-2"
+              >
                 <option value="jne">JNE</option>
                 <option value="pos">POS</option>
                 <option value="tiki">TIKI</option>
               </select>
-              <button
-                className="cek-ongkir-btn"
-                onClick={getOngkir}
-              >
+
+              <button className="cek-ongkir-btn" onClick={getOngkir}>
                 Cek Ongkir
               </button>
             </div>
