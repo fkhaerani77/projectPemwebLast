@@ -719,166 +719,145 @@ nav a:hover {
 /*CSS untuk produk ikan*/
 
 .produk-section {
-  padding: 20px 10px;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(to bottom, #b3ecff, #0099cc); /* latar seperti air laut */
+  min-height: 100vh;
 }
 
 .filter-box {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 30px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  position: sticky;
+  background-color: white;
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .filter-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 }
 
 .search-input {
-  padding: 8px 12px;
+  padding: 0.5rem 1rem;
   border-radius: 20px;
-  border: 2px solid #176B87;
-  font-size: 14px;
-  width: 200px;
+  border: 2px solid #0077b6;
+  outline: none;
 }
 
 .filter-buttons {
   display: flex;
   gap: 10px;
-  flex-wrap: wrap;
+  margin-top: 10px;
+  flex-wrap: wrap; /* Supaya responsif jika sempit */
 }
 
 .filter-buttons button {
-  padding: 8px 16px;
+  min-width: 120px;     /* Ukuran tetap minimal */
+  padding: 8px 12px;
+  background-color: #0d6efd;
+  color: white;
   border: none;
   border-radius: 6px;
-  background-color: #2b7cff;
-  color: white;
   cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  text-align: center;
+  justify-content: center; /* Atau space-between */
+  flex-wrap: nowrap;
 }
 
 .filter-buttons button:hover {
-  background-color: #195ecb;
+  background-color: #0b5ed7;
 }
+
 
 .produk-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* fleksibel, tetap 3–4 kolom */
-  gap: 16px;                     /* rapatkan antar item */
-  padding: 0 10px;  
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.5rem;
 }
 
 .produk-card {
-  border: 1px solid #ccc;
-  border-radius: 12px;
+  background-color: white;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  background-color: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
-  width: 251px;
-  height: 316px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-family: Poppins, sans-serif;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
 }
 
 .produk-card:hover {
   transform: translateY(-5px);
 }
 
-.produk-img {
-  width: 196px;
-  height: 168px;
+.produk-card img {
+  width: 100%;
+  height: 200px;
   object-fit: cover;
-  border-radius: 20px;
-
+  border-radius: 12px;
 }
 
 .produk-info {
-  padding-left: 27px;
-  padding-right: 27px;
+  margin-top: 1rem;
 }
 
-.produk-info .h3 {
-  margin-bottom: 8px;
-  font-family: Poppins, sans-serif;
-  font-weight: 600;
-  text-align: left;
-  padding-bottom: 10px;
+.produk-info h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
 
+.harga {
+  font-weight: bold;
+  color: #1b5e20;
+}
+
+.detail-btn,
+.add-btn {
+  margin: 0.3rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .detail-btn {
-  margin-top: 10px;
-  padding: 6px 12px;
-  background-color: #176B87;
+  background-color: #64b5f6;
   color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.detail-btn:hover {
-  background-color: #104d61;
-  transform: scale(1.05);
-  transition: all 0.2s ease;
-}
-
-.modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: left;
-  z-index: 999;
-}
-
-.modal-content {
-  text-align: justify;
-}
-
-.modal-img {
-  width: 100%;
-  height: auto;
-  max-height: 300px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-.popup-img {
-  width: 100%;
-  max-height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
 }
 
 .add-btn {
-  margin-top: 15px;
-  padding: 10px 16px;
-  background-color: #176B87;
+  background-color: #43a047;
   color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
 }
 
-.add-btn:hover {
-  background-color: #104d61;
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh; /* BATAS TINGGI POPUP */
+  overflow-y: auto;  /* SCROLL jika isi lebih panjang */
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .close-btn {
@@ -888,12 +867,38 @@ nav a:hover {
   background: red;
   color: white;
   border: none;
-  font-size: 20px;
-  border-radius: 50%;
+  font-size: 1.2rem;
   cursor: pointer;
-  width: 30px;
-  height: 30px;
+  z-index: 10001;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%; /* Membuat tombol bulat */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* opsional: agar lebih menonjol */
+  transition: background 0.2s;
 }
+
+.close-btn:hover {
+  background: darkred;
+}
+
+.modal-img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+/* Keranjang */
+.keranjang {
+  margin-top: 3rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 
 /*CSS untuk Keranjang*/
 
@@ -1212,7 +1217,63 @@ button.hapus {
   background-color: #45a049;
 }
 
+/*AdminPanel*/
 
+.admin-panel {
+  padding: 20px;
+}
+.form-produk input {
+  margin: 5px;
+  padding: 8px;
+}
+.produk-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+.produk-table th, .produk-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+
+/*plant tambahan*/
+.form-produk {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* jarak antar input sedikit lebih rapat */
+  align-items: center;
+}
+
+.form-produk .input-field {
+  flex: 1 1 150px; /* Lebar input lebih kecil */
+  padding: 4px 10px; /* Padding lebih ramping */
+  font-size: 14px;   /* Font lebih kecil */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: Poppins, sans-serif;
+}
+
+.form-produk button {
+  background-color: #176b87;
+  color: white;
+  border: none;
+  padding: 8px 16px; /* Tombol juga lebih ramping */
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: Poppins, sans-serif;
+  transition: background 0.2s ease;
+  font-size: 14px;
+}
+
+.form-produk textarea {
+  height: 34px; /* samakan dengan tinggi input */
+  resize: none; /* biar nggak bisa diubah ukurannya manual */
+}
+
+.form-produk button:hover {
+  background-color: #0b5ed7;
+}
 
 
 

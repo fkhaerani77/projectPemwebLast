@@ -10,8 +10,7 @@ import Tips from "./pages/Tips";
 import Cart from "./pages/Cart";
 import OrderSummary from "./pages/OrderSummary";
 import OrderTracking from "./pages/OrderTracking";
-
-
+import AdminPanel from './pages/AdminPanel';
 import { CartProvider } from './context/CartContext';
 
 function App() {
@@ -29,6 +28,7 @@ function App() {
               <Route path="/cart" element={<Cart />} />
               <Route path="/order-summary" element={<OrderSummary />} />
               <Route path="/order-tracking" element={<OrderTracking />} />
+              <Route path="/admin" element={<AdminPanel />} />
             </Routes>
           </main>
           <Footer />
