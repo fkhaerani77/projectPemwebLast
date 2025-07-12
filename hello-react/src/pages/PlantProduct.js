@@ -2,6 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 
 const PlantProduct = () => {
+  const API_BASE = 'http://192.168.51.192/backend/api/productPlant/';
+  const UPLOAD_BASE = 'http://192.168.51.192/backend/api/productPlant/upload/';
+
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [filter, setFilter] = useState('semua');
   const [searchTerm, setSearchTerm] = useState('');
@@ -19,7 +22,7 @@ const PlantProduct = () => {
   });
 
   useEffect(() => {
-    fetch('http://localhost/backend/api/productPlant/readPlant.php')
+    fetch(`${API_BASE}readPlant.php`)
       .then(res => res.json())
       .then(data => setProdukList(data))
       .catch(err => console.error(err));
@@ -47,9 +50,7 @@ const PlantProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const url = isEdit
-      ? 'http://localhost/backend/api/productPlant/updatePlant.php'
-      : 'http://localhost/backend/api/productPlant/createPlant.php';
+    const url = isEdit ? `${API_BASE}updatePlant.php` : `${API_BASE}createPlant.php`;
 
     const formData = new FormData();
     formData.append('namaP', newProduct.namaP);
@@ -121,7 +122,7 @@ const PlantProduct = () => {
 
   const handleDelete = (id) => {
     if (window.confirm('Yakin mau hapus produk ini?')) {
-      fetch('http://localhost/backend/api/productPlant/deletePlant.php', {
+      fetch(`${API_BASE}deletePlant.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: id }),
@@ -224,7 +225,7 @@ const PlantProduct = () => {
         {filteredProduk.map((produk, index) => (
           <div key={index} className="produk-card">
             <img
-              src={`http://localhost/backend/api/productPlant/upload/${produk.gambarP}`}
+              src={`${UPLOAD_BASE}${produk.gambarP}`}
               alt={produk.namaP}
             />
             <div className="produk-info">
@@ -249,7 +250,7 @@ const PlantProduct = () => {
           <div className="modal-content">
             <button className="close-btn" onClick={closePopup}>×</button>
             <img
-              src={`http://localhost/backend/api/productPlant/upload/${selectedProduct.gambarP}`}
+              src={`${UPLOAD_BASE}${selectedProduct.gambarP}`}
               alt={selectedProduct.namaP}
               className="modal-img"
             />
