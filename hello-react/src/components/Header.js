@@ -9,7 +9,7 @@ import ikanIcon from "../assets/fish.png";
 import tanamanIcon from "../assets/plant.png";
 // Jangan import AdminPanel di Header, karena AdminPanel dipanggil di App.js via routing
 import { Link } from "react-router-dom";
-import { CartContext } from "../context/CartContext";
+// import { CartContext } from "../context/CartContext";
 
 function Header() {
   return (
