@@ -1,37 +1,26 @@
-import React, { useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { CartContext } from '../context/CartContext';
-import ikan1 from '../assets/gabus.jpeg';
-import ikan2 from '../assets/gurame.jpeg';
-import ikan3 from '../assets/lele.jpeg';
-import ikan4 from '../assets/patin.jpeg';
-import ikan5 from '../assets/koi.jpeg';
-import ikan6 from '../assets/guppy.jpeg';
-import ikan7 from '../assets/mas.jpeg';
-import ikan8 from '../assets/mujaer.jpeg';
-import ikan9 from '../assets/nila.jpeg';
-import ikan10 from '../assets/belut.jpeg';
-import ikan11 from '../assets/arwana.jpeg';
+import ikanDefault from '../assets/gabus.jpeg'; // fallback gambar default
 
 const FishProduct = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [filter, setFilter] = useState('semua');
   const [searchTerm, setSearchTerm] = useState('');
-  const { keranjang, addToCart } = useContext(CartContext);
+const { keranjang } = useContext(CartContext);
 
 
-  const produkList = [
-    { id: 1, nama: 'Ikan Gabus 1Kg', deskripsi: 'Tinggi protein, bantu pemulihan.', deskripsiLengkap: 'Ikan Gabus 1Kg adalah ikan air tawar yang dikenal dengan nilai gizi tinggi, terutama kandungan proteinnya yang dapat membantu pemulihan tubuh. Cocok untuk konsumsi sehat atau dipelihara.', panjang: '30 cm', berat: '1 kg', gambar: ikan1, kategori: 'konsumsi', price: 27000, qty: 1 },
-    { id: 2, nama: 'Ikan Gurame 1Kg', deskripsi: 'Daging tebal dan lezat.', deskripsiLengkap: 'Ikan Gurame memiliki daging yang tebal dan lezat, menjadikannya pilihan utama untuk hidangan spesial. Ikan ini juga kaya akan nutrisi penting yang baik untuk kesehatan tubuh.', panjang: '25 cm', berat: '0.8 kg', gambar: ikan2, kategori: 'konsumsi', price: 75000, qty: 1 },
-    { id: 3, nama: 'Ikan Lele 1Kg', deskripsi: 'Ikan hias kecil dengan warna menarik.', deskripsiLengkap: 'Ikan Lele merupakan ikan air tawar yang sering dikonsumsikan karena mudah dipelihara. Selain itu, ikan ini juga memiliki tekstur daging yang lezat dan kaya akan protein.', panjang: '28 cm', berat: '1 kg', gambar: ikan3, kategori: 'konsumsi', price: 19000, qty: 1 },
-    { id: 4, nama: 'Ikan Patin', deskripsi: 'Daging lembut dan protein.', deskripsiLengkap: 'Ikan Patin dikenal dengan daging yang lembut dan kaya akan protein. Ikan ini sangat cocok untuk dijadikan hidangan yang lezat dan bergizi.', panjang: '27 cm', berat: 1000, gambar: ikan4, kategori: 'konsumsi', price: 35000, qty: 1 },
-    { id: 5, nama: 'Ikan Koi', deskripsi: 'Ikan hias kecil dengan warna menarik.', deskripsiLengkap: 'Ikan Koi adalah ikan hias yang memiliki corak warna cerah dan menarik. Ikan ini sering dipelihara di kolam hias karena keindahannya yang mempesona.', panjang: '30 cm', berat: 1000, gambar: ikan5, kategori: 'hias' , price: 50000, qty: 1},
-    { id: 6, nama: 'Ikan Guppy', deskripsi: 'Ikan hias kecil dengan warna menarik.', deskripsiLengkap: 'Ikan Guppy adalah ikan hias kecil dengan warna yang cerah dan bervariasi. Ikan ini mudah dipelihara dan sering digunakan untuk mempercantik akuarium.', panjang: '26 cm', berat: 0.850, gambar: ikan6, kategori: 'hias', price: 2000, qty: 1 },
-    { id: 7, nama: 'Ikan Nila 1Kg', deskripsi: 'Daging empuk dan kaya gizi.', deskripsiLengkap: 'Ikan Nila dikenal dengan daging yang empuk dan kaya akan gizi. Ikan ini sangat cocok untuk konsumsi sehari-hari dan memiliki kandungan protein yang baik untuk kesehatan.', panjang: '29 cm', berat: 1000, gambar: ikan7, kategori: 'konsumsi', price: 47000, qty: 1 },
-    { id: 8, nama: 'Ikan Mas 1Kg', deskripsi: 'Daging lembut dan nikmat.', deskripsiLengkap: 'Ikan Mas memiliki daging yang lembut dan rasa yang nikmat, membuatnya sangat disukai dalam berbagai hidangan. Selain itu, ikan ini kaya akan nutrisi yang baik untuk tubuh.', panjang: '25 cm', berat: 0.800, gambar: ikan8, kategori: 'hias', price: 35000, qty: 1  },
-    { id: 9, nama: 'Ikan Mujair', deskripsi: 'Daging kenyal dan bergizi.', deskripsiLengkap: 'Ikan Mujair memiliki daging yang kenyal dan kaya akan gizi. Ikan ini mudah dipelihara dan sering dikonsumsikan karena pertumbuhannya yang cepat serta rasanya yang lezat.', panjang: '26 cm', berat: 0.850, gambar: ikan9, kategori: 'konsumsi', price: 53000, qty: 1 },
-    { id: 10, nama: 'Ikan Belut', deskripsi: 'Daging kenyal dan kaya protein.', deskripsiLengkap: 'Ikan Belut dikenal dengan daging yang kenyal dan kaya akan protein. Ikan ini mudah ditemukan di perairan tawar dan sering dipelihara untuk konsumsi karena rasanya yang lezat serta manfaatnya bagi kesehatan, seperti mempercepat pemulihan tubuh.', panjang: '50 cm', berat: '1.2 kg', gambar: ikan10, kategori: 'konsumsi', price: 55000, qty: 1 },
-    { id: 11, nama: 'Ikan Arwana', deskripsi: 'Ikan hias mewah, warna cerah.', deskripsiLengkap: 'Ikan Arwana dikenal dengan warnanya yang cerah dan penampilannya yang menawan. Ikan ini dianggap sebagai ikan pembawa keberuntungan dan sering dipelihara dalam akuarium besar.', panjang: '60 cm', berat: 1500, gambar: ikan11, kategori: 'hias', price: 200000, qty: 1 },
-  ];
+  const [produkList, setProdukList] = useState([]);
+
+  useEffect(() => {
+  fetch('http://localhost/backend/api/ProductFish/read.php')
+    .then(res => res.json())
+    .then(data => {
+      console.log("Data produk:", data); // 🔍 cek isi
+      setProdukList(data);
+    })
+    .catch(error => console.error('Gagal fetch produk:', error));
+}, []);
+
 
   const filteredProduk = produkList.filter((produk) => {
     const cocokKategori = filter === 'semua' || produk.kategori === filter;
@@ -47,10 +36,39 @@ const FishProduct = () => {
     setSelectedProduct(null);
   };
 
-  const handleAddToCart = (produk) => {
-    const newProduct = { ...produk, qty: 1 };
-    addToCart(newProduct); // Menambahkan item ke keranjang melalui CartContext
+const handleAddToCart = async (produk) => {
+  const payload = {
+    produk_id: produk.id, // ⬅️ ini WAJIB ADA!
+    nama_produk: produk.nama,
+    berat: produk.berat,
+    harga: produk.harga,
+    qty: 1,
+    kota_tujuan: "Jakarta",
+    ekspedisi: "JNE",
+    gambar: produk.gambar || null,
   };
+
+  try {
+    const res = await fetch("http://localhost/backend/api/cart/createCart.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const result = await res.json();
+    console.log("📦 RESPON DARI SERVER:", result);
+
+    if (result.success) {
+      alert("Berhasil ditambahkan ke keranjang!");
+    } else {
+      alert("Gagal: " + result.message);
+    }
+  } catch (err) {
+  console.error("❌ ERROR SAAT REQUEST:", err.message || err);
+}
+};
 
   return (
     <div className="produk-section">
@@ -75,26 +93,38 @@ const FishProduct = () => {
       <div className="produk-grid">
         {filteredProduk.map((produk) => (
           <div key={produk.id} className="produk-card">
-            <img src={produk.gambar} alt={produk.nama} className="produk-img" />
+            <img
+              src={
+                produk.gambar
+                  ? `http://localhost/backend/api/ProductFish/upload/${produk.gambar}`
+                  : ikanDefault
+              }
+              alt={produk.nama}
+              width="100%"
+            />
             <div className="produk-info">
               <h3>{produk.nama}</h3>
               <p>{produk.deskripsi}</p>
+              <p className="harga">Rp {parseInt(produk.harga).toLocaleString()}</p>
               <button className="detail-btn" onClick={() => handleDetailClick(produk)}>
                 Detail
+              </button>
+              <button className="add-btn" onClick={() => handleAddToCart(produk)}>
+                Tambah
               </button>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Menampilkan Keranjang */}
+      {/* Keranjang */}
       <div className="keranjang">
         <h2>Keranjang</h2>
         {keranjang.length > 0 ? (
           <ul>
             {keranjang.map((produk, index) => (
               <li key={index}>
-                {produk.nama} - {produk.berat}
+                {produk.nama} - {produk.berat} kg
               </li>
             ))}
           </ul>
@@ -103,29 +133,37 @@ const FishProduct = () => {
         )}
       </div>
 
-      {selectedProduct && (
-        <div className="modal">
-          <div className="modal-content">
-            <button className="close-btn" onClick={closePopup}>×</button>
-            <img
-              src={selectedProduct.gambar}
-              alt={selectedProduct.nama}
-              className="modal-img"
-            />
-            <h3>{selectedProduct.nama}</h3>
-            <p>{selectedProduct.deskripsiLengkap}</p>
-            <div className="detail-info">
-              <span>Panjang: {selectedProduct.panjang}</span>
-              <span>Berat: {selectedProduct.berat}</span>
-            </div>
-            <button className="add-btn" onClick={() => handleAddToCart(selectedProduct)}>
-            Tambah Item
-          </button>
+      {/* Modal Detail */}
+      {/* Modal Detail */}
+{selectedProduct && (
+  <div className="modal">
+    <div className="modal-content">
+      <button className="close-btn" onClick={closePopup}>×</button>
+      <img
+        src={
+          selectedProduct.gambar
+            ? `http://localhost/backend/api/ProductFish/upload/${selectedProduct.gambar}`
+            : ikanDefault
+        }
+        alt={selectedProduct.nama}
+        className="modal-img"
+      />
+
+      <h3>{selectedProduct.nama}</h3>
+      <p>{selectedProduct.deskripsi}</p>
+      <div className="detail-info">
+        <span>Kategori: {selectedProduct.kategori}</span>
+        <span>Berat: {selectedProduct.berat} kg</span>
+        <span>Harga: Rp {parseInt(selectedProduct.harga).toLocaleString()}</span>
+      </div>
+      <button className="add-btn" onClick={() => handleAddToCart(selectedProduct)}>
+        Tambah
+      </button>
+    </div>
+  </div>
+)}
 
 
-          </div>
-        </div>
-      )}
     </div>
   );
 };
