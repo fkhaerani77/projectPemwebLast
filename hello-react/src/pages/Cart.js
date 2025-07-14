@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import logoDana from '../assets/logo-dana.png';
 import axios from 'axios';
-// import CitySelector from "./CitySelector"; // Import komponen CitySelector
 
 const Cart = () => {
   const { keranjang, setKeranjang } = useContext(CartContext);
@@ -22,12 +21,11 @@ const Cart = () => {
       .catch(err => {
         console.error("Gagal memuat cart:", err);
       });
-  }, [setKeranjang ]);
+  }, [setKeranjang]);
 
   const [ongkir, setOngkir] = useState(null);
   const [kotaTujuan] = useState("");
   const [kurir, setKurir] = useState("jne");
-  // const [kotaList, setKotaList] = useState([]); // Daftar kota sudah diambil oleh CitySelector
 
   const isUserDataComplete = userData.nama && userData.alamat && userData.telepon;
 
@@ -39,13 +37,12 @@ const Cart = () => {
     );
   };
 
-  const total = keranjang
+  const total = (keranjang || [])
     .filter((item) => selectedItems.includes(item.id))
     .reduce((sum, item) => sum + item.harga * item.qty, 0);
 
-  // Function untuk menghitung ongkir
   const getOngkir = async () => {
-    const selectedItemsList = keranjang.filter(item => selectedItems.includes(item.id));
+    const selectedItemsList = (keranjang || []).filter(item => selectedItems.includes(item.id));
     const beratTotal = selectedItemsList.reduce((sum, item) => sum + item.berat * item.qty, 0);
 
     try {
@@ -69,7 +66,7 @@ const Cart = () => {
   };
 
   const updateQty = async (id, delta) => {
-    const item = keranjang.find(i => i.id === id);
+    const item = (keranjang || []).find(i => i.id === id);
     if (!item) return;
 
     const newQty = Math.max(1, item.qty + delta);
@@ -102,27 +99,6 @@ const Cart = () => {
     }
   };
 
-  // const addToCart = async (produk) => {
-  //   try {
-  //     await axios.post("http://localhost/backend/api/cart/createCart.php", {
-  //       produk_id: produk.id,
-  //       nama: produk.nama,
-  //       berat: produk.berat,
-  //       harga: produk.harga,
-  //       qty: 1,
-  //       kota_tujuan: "Jakarta",
-  //       ekspedisi: "JNE"
-  //     });
-
-  //     // ✅ Ambil ulang data cart
-  //     const res = await axios.get("http://localhost/backend/api/cart/readCart.php");
-  //     setKeranjang(res.data.data);
-
-  //   } catch (err) {
-  //     console.error("Gagal menambahkan ke cart:", err);
-  //   }
-  // };
-
   const handleCheckout = () => {
     if (!isUserDataComplete) {
       alert('Lengkapi data diri Anda terlebih dahulu!');
@@ -149,12 +125,12 @@ const Cart = () => {
       <div className="cart-items w-2/3 p-6">
         <h2 className="text-3xl font-bold mb-6">Keranjang Belanja</h2>
 
-        {keranjang.length === 0 ? (
+        {(keranjang || []).length === 0 ? (
           <div className="empty-cart">
             <p>Keranjang Anda masih kosong. Silakan tambahkan produk.</p>
           </div>
         ) : (
-          keranjang.map((item) => (
+          (keranjang || []).map((item) => (
             <div key={item.id} className="cart-item flex items-center mb-4">
               <input
                 type="checkbox"
@@ -185,7 +161,7 @@ const Cart = () => {
           <>
             <h3 className="summary-title">Ringkasan Belanja</h3>
             <ul className="summary-list">
-              {keranjang
+              {(keranjang || [])
                 .filter((item) => selectedItems.includes(item.id))
                 .map((item) => (
                   <li key={item.id} className="summary-item">
@@ -195,17 +171,8 @@ const Cart = () => {
                 ))}
             </ul>
 
-            {/* Pengiriman */}
             <div className="ongkir-form mb-4">
               <h3 className="font-semibold mb-2">Pengiriman</h3>
-
-              {/* Gunakan komponen CitySelector untuk memilih kota tujuan
-              <CitySelector
-                kotaList={kotaList}
-                selectedKota={kotaTujuan}
-                onCityChange={setKotaTujuan}
-              /> */}
-
               <select
                 value={kurir}
                 onChange={(e) => setKurir(e.target.value)}
@@ -221,7 +188,6 @@ const Cart = () => {
               </button>
             </div>
 
-            {/* Total */}
             <div className="total">
               <p>Subtotal: {formatRupiah(total)}</p>
               <p>Ongkir: {formatRupiah(ongkir ? ongkir.value : 0)}</p>
@@ -230,7 +196,6 @@ const Cart = () => {
               </p>
             </div>
 
-            {/* Informasi Pemesan */}
             <div className="user-data-form">
               <h3 className="text-lg font-semibold mb-4">Informasi Pemesan</h3>
               <input

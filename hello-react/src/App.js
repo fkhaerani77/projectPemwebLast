@@ -12,6 +12,7 @@ import OrderSummary from "./pages/OrderSummary";
 import OrderTracking from "./pages/OrderTracking";
 import AdminPanel from './pages/AdminPanel';
 import { CartProvider } from './context/CartContext';
+import FishAdmin from "./pages/FishAdmin";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="/order-summary" element={<OrderSummary />} />
               <Route path="/order-tracking" element={<OrderTracking />} />
               <Route path="/admin" element={<AdminPanel />} />
+              <Route path="/admin/ikan" element={<FishAdmin />} />
             </Routes>
           </main>
           <Footer />
