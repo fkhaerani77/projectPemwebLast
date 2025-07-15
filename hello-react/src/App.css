@@ -1276,9 +1276,130 @@ button.hapus {
 }
 
 
+/*mobile responsiv*/
+/* === RESPONSIVE PRODUK IKAN === */
+@media screen and (max-width: 768px) {
+  .produk-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
+  .produk-card img {
+    height: 160px;
+  }
 
+  .produk-info h3 {
+    font-size: 1rem;
+  }
 
+  .produk-info p {
+    font-size: 0.9rem;
+  }
 
+  .filter-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
+  .filter-buttons button {
+    min-width: unset;
+    width: 100%;
+  }
 
+  .modal-content {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .produk-section {
+    padding: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .produk-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .produk-card img {
+    height: 140px;
+  }
+
+  .detail-btn,
+  .add-btn {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+}
+/* === HEADER RESPONSIVE === */
+@media screen and (max-width: 768px) {
+
+  body {
+    padding-top: 500px; /* Sesuaikan dengan tinggi header versi mobile */
+  } 
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px 20px;
+    gap: 5px;
+  }
+
+  .logoPojok {
+    font-size: 18px;
+    margin-bottom: 5px;
+    justify-content: flex-start;
+  }
+
+  nav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 0;
+    gap: 10px;
+  }
+
+  nav a, 
+  .dropbtn {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #5C5C5C;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .dropdown-content {
+    position: relative;
+    display: none;
+    background-color: transparent;
+    box-shadow: none;
+    width: 100%;
+    padding-left: 10px;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content a {
+    color: #5C5C5C;
+    background: none;
+    padding: 8px 0;
+    border-bottom: 1px dotted #aaa;
+  }
+
+  .dropdown-content a:hover {
+    color: #176b87;
+    background: none;
+  }
+
+  .nav-icon {
+    display: none;
+  }
+}

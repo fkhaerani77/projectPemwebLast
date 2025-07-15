@@ -4,6 +4,7 @@ import logoDana from '../assets/logo-dana.png';
 import axios from 'axios';
 // import CitySelector from "./CitySelector"; // Import komponen CitySelector
 
+
 const Cart = () => {
   const { keranjang, setKeranjang } = useContext(CartContext);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -14,7 +15,7 @@ const Cart = () => {
   });
 
   useEffect(() => {
-    axios.get("http://localhost/backend/api/cart/readCart.php")
+    axios.get("http://192.168.51.192/backend/api/cart/readCart.php")
       .then(res => {
         console.log("🔍 ISI KERANJANG DARI SERVER:", res.data);
         setKeranjang(res.data.data);
@@ -49,7 +50,7 @@ const Cart = () => {
     const beratTotal = selectedItemsList.reduce((sum, item) => sum + item.berat * item.qty, 0);
 
     try {
-      const res = await axios.post("http://localhost/backend/api/ongkir/getOngkirFromDB.php", {
+      const res = await axios.post("http://192.168.51.192/backend/api/ongkir/getOngkirFromDB.php", {
         origin: "Cirebon",
         destination: kotaTujuan,
         courier: kurir
@@ -75,14 +76,14 @@ const Cart = () => {
     const newQty = Math.max(1, item.qty + delta);
 
     try {
-      await axios.put('http://localhost/backend/api/cart/updateCart.php', {
+      await axios.put('http://192.168.51.192/backend/api/cart/updateCart.php', {
         id: item.id,
         qty: newQty,
         kota_tujuan: item.kota_tujuan,
         ekspedisi: item.ekspedisi
       });
 
-      const res = await axios.get("http://localhost/backend/api/cart/readCart.php");
+      const res = await axios.get("http://192.168.51.192/backend/api/cart/readCart.php");
       setKeranjang(res.data.data);
     } catch (err) {
       console.error("Gagal update qty:", err);
@@ -91,11 +92,11 @@ const Cart = () => {
 
   const removeItem = async (id) => {
     try {
-      await axios.delete('http://localhost/backend/api/cart/deleteCart.php', {
+      await axios.delete('http://192.168.51.192/backend/api/cart/deleteCart.php', {
         data: { id }
       });
 
-      const res = await axios.get("http://localhost/backend/api/cart/readCart.php");
+      const res = await axios.get("http://192.168.51.192/backend/api/cart/readCart.php");
       setKeranjang(res.data.data);
     } catch (err) {
       console.error("Gagal menghapus item:", err);
@@ -162,7 +163,7 @@ const Cart = () => {
                 onChange={() => toggleSelectItem(item.id)}
                 className="checkbox mr-4"
               />
-              <img src={`http://localhost/backend/api/ProductFish/upload/${item.gambar}`} alt={item.nama} />
+              <img src={`http://192.168.51.192/backend/api/ProductFish/upload/${item.gambar}`} alt={item.nama} />
               <div className="item-info flex-grow">
                 <h3 className="text-xl">{item.nama}</h3>
                 <p className="price">Rp {(item.harga ?? 0).toLocaleString()}</p>
